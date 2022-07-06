@@ -1,0 +1,30 @@
+syntax = "proto3";
+package flutter_sample;
+
+message Article {
+  string id = 1;
+  string title = 2;
+  string body = 3;
+  int32 liked_count = 4;
+}
+
+service ArticleService {
+  rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse) {}
+  rpc LikeArticle(LikeArticleRequest) returns (LikeArticleResponse) {}
+}
+
+message ListArticlesRequest {
+  // nothing
+}
+
+message ListArticlesResponse {
+  repeated Article articles = 1;
+}
+
+message LikeArticleRequest {
+  int32 article_id = 1;
+}
+
+message LikeArticleResponse {
+  // nothing
+}
