@@ -22,6 +22,8 @@ class LogInterceptor extends ClientInterceptor {
       if (response is GeneratedMessage) {
         log('[${response.runtimeType}] ${jsonEncode(response.toProto3Json())}');
       }
+    }).catchError((e) {
+      log('[${e.runtimeType}] ${e.toString()}');
     });
 
     return responseFuture;

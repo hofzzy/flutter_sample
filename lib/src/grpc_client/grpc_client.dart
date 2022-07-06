@@ -3,10 +3,11 @@ import 'package:grpc/grpc.dart';
 
 import '../config.dart';
 import 'grpc_config.dart';
+import 'grpc_error_handler.dart';
 import 'log_interceptor.dart';
 
 @immutable
-abstract class GrpcClient<T extends Client> {
+abstract class GrpcClient<T extends Client> with GrpcErrorHandler {
   static const _defaultTimeout = Duration(seconds: 10);
 
   @protected
