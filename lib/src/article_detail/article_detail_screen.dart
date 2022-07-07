@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../article.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
+import '../liked_count_view.dart';
 import '../router.dart';
 
 final fetchArticle =
@@ -29,11 +30,30 @@ class ArticleDetailScreen extends ConsumerWidget {
       appBar: AppBar(title: const Text('記事詳細')),
       body: article.when(
         data: (article) {
-          return Column(
-            children: [
-              Text(article.title),
-              Text(article.body),
-            ],
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        article.title,
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    LikedCountView(article.likedCount),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  article.body,
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              ],
+            ),
           );
         },
         error: (error, _) {

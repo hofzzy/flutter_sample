@@ -6,6 +6,7 @@ import '../article.dart';
 import '../article_detail/article_detail_screen.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
+import '../liked_count_view.dart';
 
 final fetchArticlesProvider = FutureProvider<List<Article>>((ref) async {
   final articleClient = ref.read(articleClientProvider);
@@ -26,15 +27,9 @@ class ArticleListScreen extends ConsumerWidget {
             itemBuilder: (_, index) {
               final article = articles[index];
               return ListTile(
-                title: Text(article.title),
-                subtitle: Text(article.body),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(Icons.favorite),
-                    Text(article.likedCount.toString()),
-                  ],
-                ),
+                title: Text(article.title, maxLines: 1),
+                subtitle: Text(article.body, maxLines: 1),
+                trailing: LikedCountView(article.likedCount),
                 onTap: () {
                   context.pushNamed(
                     ArticleDetailScreen.routeName,
