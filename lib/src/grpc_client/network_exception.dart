@@ -17,6 +17,13 @@ abstract class NetworkException implements Exception {
   const NetworkException(this.original, this.stackTrace);
 }
 
+class NotFoundException extends NetworkException {
+  @override
+  final String message;
+
+  const NotFoundException(this.message, super.original, super.stackTrace);
+}
+
 class RequestTimeoutException extends NetworkException {
   @override
   final String message = '通信エラーが発生しました。ネットワーク環境をご確認ください';

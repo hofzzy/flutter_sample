@@ -2,11 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../proto_generated/article.pbgrpc.dart' as pb;
 import '../article.dart';
+import '../config.dart';
 import 'grpc_client.dart';
 import 'grpc_config.dart';
 
-final articleClientProvider = Provider.family<ArticleClient, GrpcConfig>(
-    (ref, grpcConfig) => ArticleClient(grpcConfig: grpcConfig));
+final articleClientProvider = Provider<ArticleClient>((ref) {
+  final config = ref.watch(localConfigProvider);
+  return ArticleClient(grpcConfig: config.grpcConfig);
+});
 
 class ArticleClient extends GrpcClient<pb.ArticleServiceClient> {
   @override
@@ -26,6 +29,15 @@ class ArticleClient extends GrpcClient<pb.ArticleServiceClient> {
       return response.articles
           .map((e) => Article(e.id, e.title, e.body, e.likedCount))
           .toList();
+    });
+  }
+
+  Future<Article> getArticle(String id) async {
+    final request = pb.GetArticleRequest(id: id);
+    return handleCommonError(() async {
+      final article = (await client.getArticle(request)).article;
+      return Article(
+          article.id, article.title, article.body, article.likedCount);
     });
   }
 

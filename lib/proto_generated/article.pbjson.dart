@@ -3,7 +3,7 @@
 //  source: article.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
@@ -38,6 +38,26 @@ const ListArticlesResponse$json = const {
 
 /// Descriptor for `ListArticlesResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List listArticlesResponseDescriptor = $convert.base64Decode('ChRMaXN0QXJ0aWNsZXNSZXNwb25zZRIzCghhcnRpY2xlcxgBIAMoCzIXLmZsdXR0ZXJfc2FtcGxlLkFydGljbGVSCGFydGljbGVz');
+@$core.Deprecated('Use getArticleRequestDescriptor instead')
+const GetArticleRequest$json = const {
+  '1': 'GetArticleRequest',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
+  ],
+};
+
+/// Descriptor for `GetArticleRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getArticleRequestDescriptor = $convert.base64Decode('ChFHZXRBcnRpY2xlUmVxdWVzdBIOCgJpZBgBIAEoCVICaWQ=');
+@$core.Deprecated('Use getArticleResponseDescriptor instead')
+const GetArticleResponse$json = const {
+  '1': 'GetArticleResponse',
+  '2': const [
+    const {'1': 'article', '3': 1, '4': 1, '5': 11, '6': '.flutter_sample.Article', '10': 'article'},
+  ],
+};
+
+/// Descriptor for `GetArticleResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List getArticleResponseDescriptor = $convert.base64Decode('ChJHZXRBcnRpY2xlUmVzcG9uc2USMQoHYXJ0aWNsZRgBIAEoCzIXLmZsdXR0ZXJfc2FtcGxlLkFydGljbGVSB2FydGljbGU=');
 @$core.Deprecated('Use likeArticleRequestDescriptor instead')
 const LikeArticleRequest$json = const {
   '1': 'LikeArticleRequest',

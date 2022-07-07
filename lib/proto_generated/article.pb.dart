@@ -3,7 +3,7 @@
 //  source: article.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 
@@ -166,6 +166,102 @@ class ListArticlesResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<Article> get articles => $_getList(0);
+}
+
+class GetArticleRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetArticleRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'id')
+    ..hasRequiredFields = false
+  ;
+
+  GetArticleRequest._() : super();
+  factory GetArticleRequest({
+    $core.String? id,
+  }) {
+    final _result = create();
+    if (id != null) {
+      _result.id = id;
+    }
+    return _result;
+  }
+  factory GetArticleRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetArticleRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetArticleRequest clone() => GetArticleRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetArticleRequest copyWith(void Function(GetArticleRequest) updates) => super.copyWith((message) => updates(message as GetArticleRequest)) as GetArticleRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetArticleRequest create() => GetArticleRequest._();
+  GetArticleRequest createEmptyInstance() => create();
+  static $pb.PbList<GetArticleRequest> createRepeated() => $pb.PbList<GetArticleRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetArticleRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetArticleRequest>(create);
+  static GetArticleRequest? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get id => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set id($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearId() => clearField(1);
+}
+
+class GetArticleResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'GetArticleResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
+    ..aOM<Article>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'article', subBuilder: Article.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetArticleResponse._() : super();
+  factory GetArticleResponse({
+    Article? article,
+  }) {
+    final _result = create();
+    if (article != null) {
+      _result.article = article;
+    }
+    return _result;
+  }
+  factory GetArticleResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetArticleResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  GetArticleResponse clone() => GetArticleResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  GetArticleResponse copyWith(void Function(GetArticleResponse) updates) => super.copyWith((message) => updates(message as GetArticleResponse)) as GetArticleResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetArticleResponse create() => GetArticleResponse._();
+  GetArticleResponse createEmptyInstance() => create();
+  static $pb.PbList<GetArticleResponse> createRepeated() => $pb.PbList<GetArticleResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetArticleResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetArticleResponse>(create);
+  static GetArticleResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  Article get article => $_getN(0);
+  @$pb.TagNumber(1)
+  set article(Article v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasArticle() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearArticle() => clearField(1);
+  @$pb.TagNumber(1)
+  Article ensureArticle() => $_ensure(0);
 }
 
 class LikeArticleRequest extends $pb.GeneratedMessage {

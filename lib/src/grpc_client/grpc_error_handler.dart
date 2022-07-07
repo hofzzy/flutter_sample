@@ -8,6 +8,11 @@ mixin GrpcErrorHandler {
       return await function();
     } on GrpcError catch (error, stackTrace) {
       switch (error.code) {
+        case StatusCode.notFound:
+          throw NotFoundException(
+              error.message ?? 'Not found. A message is empty',
+              error,
+              stackTrace);
         case StatusCode.deadlineExceeded:
           throw RequestTimeoutException(error, stackTrace);
         case StatusCode.internal:

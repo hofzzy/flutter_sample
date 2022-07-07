@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../article.dart';
-import '../config.dart';
+import '../article_detail/article_detail_screen.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
 
 final fetchArticlesProvider = FutureProvider<List<Article>>((ref) async {
-  final localConfig = ref.read(localConfigProvider);
-  final articleClient = ref.read(articleClientProvider(localConfig.grpcConfig));
+  final articleClient = ref.read(articleClientProvider);
   return articleClient.listArticles();
 });
 
@@ -35,6 +35,12 @@ class ArticleListScreen extends ConsumerWidget {
                     Text(article.likedCount.toString()),
                   ],
                 ),
+                onTap: () {
+                  context.pushNamed(
+                    ArticleDetailScreen.routeName,
+                    params: ArticleDetailArgument(article.id).toParams(),
+                  );
+                },
               );
             },
             itemCount: articles.length,

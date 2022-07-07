@@ -10,6 +10,7 @@ message Article {
 
 service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse) {}
+  rpc GetArticle(GetArticleRequest) returns (GetArticleResponse) {}
   rpc LikeArticle(LikeArticleRequest) returns (LikeArticleResponse) {}
 }
 
@@ -19,6 +20,14 @@ message ListArticlesRequest {
 
 message ListArticlesResponse {
   repeated Article articles = 1;
+}
+
+message GetArticleRequest {
+  string id = 1;
+}
+
+message GetArticleResponse {
+  Article article = 1;
 }
 
 message LikeArticleRequest {
