@@ -24,10 +24,20 @@ class ArticleMockService extends ArticleServiceBase {
   Future<LikeArticleResponse> likeArticle(
       ServiceCall call, LikeArticleRequest request) async {
     await handleCommonPreProcess();
+    _validateLikeArticleRequest();
+    final article = articles.firstWhere((e) => e.id == request.articleId);
+    request.liked ? article.likedCount++ : article.likedCount--;
+    article.liked = request.liked;
     return LikeArticleResponse();
   }
 
   void _validateGetArticleRequest({bool debugNotFoundException = false}) {
+    if (debugNotFoundException) {
+      throw GrpcError.notFound('この記事は削除されました');
+    }
+  }
+
+  void _validateLikeArticleRequest({bool debugNotFoundException = false}) {
     if (debugNotFoundException) {
       throw GrpcError.notFound('この記事は削除されました');
     }
@@ -42,6 +52,7 @@ class ArticleMockService extends ArticleServiceBase {
           'We have several exciting things to announce as part of this release, including the update on Flutter’s support for macOS and Linux, significant performance improvements, mobile and web updates — and much more! In addition, we have news about reduction in support for older versions of Windows, and a short list of breaking changes. So, let’s get down to business!\n\n'
           'From the Flutter Team at Google, we say thank you for the awesome work the community has done to help Flutter maintain its status as the most popular cross-platform UI toolkit, as measured by analysts like Statista and SlashData. We look forward to working together as a community to continue to provide a community driven tool that helps create a delightful experience for the developers and users alike!',
       likedCount: 0,
+      liked: false,
     ),
     Article(
       id: '2',
@@ -51,6 +62,7 @@ class ArticleMockService extends ArticleServiceBase {
           'We started Flutter as an attempt to revolutionize app development: combining the iterative development model of the web with hardware-accelerated graphics rendering and pixel-level control that were previously the preserve of games. Over the last four years since Flutter 1.0 beta, we’ve gradually built on these foundations, adding new framework capabilities and new widgets, deeper integration with the underlying platforms, a rich library of packages and many performance and tooling improvements.'
           'As the product has matured, more of you have started to build apps with it. Today there are over 500,000 apps built with Flutter. Analytics from research firms like data.ai, along with public testimonials, show Flutter is used by a broad list of customers in many segments: from social apps like WeChat to finance and banking apps like Betterment and Nubank; from commerce apps like SHEIN and trip.com to lifestyle apps like Fastic and Tabcorp; from companion apps like My BMW to public institutions such as the Brazil government.',
       likedCount: 3600,
+      liked: false,
     ),
     Article(
       id: '3',
@@ -58,6 +70,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'Each year we, like other large teams at Google, go through a planning process to set our goals and areas of focus for the upcoming year.',
       likedCount: 618,
+      liked: false,
     ),
     Article(
       id: '4',
@@ -65,12 +78,14 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'I can’t believe it’s time again for a Flutter stable release! Hello and welcome to Flutter 2.10.',
       likedCount: 4100,
+      liked: false,
     ),
     Article(
       id: '5',
       title: 'Announcing Flutter for Windows',
       body: 'Build high-quality Windows apps that also run on mobile and web',
       likedCount: 1200,
+      liked: false,
     ),
     Article(
       id: '6',
@@ -78,12 +93,14 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'Performance improvements, new Firebase features, desktop status, tooling updates and more!',
       likedCount: 6100,
+      liked: false,
     ),
     Article(
       id: '7',
       title: 'Announcing Flutter 2.8',
       body: 'A new release of Flutter: and a look back on a year of growth',
       likedCount: 3900,
+      liked: false,
     ),
     Article(
       id: '8',
@@ -92,6 +109,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'There are many ways for apps to make money: accepting payments as a storefront for a physical business',
       likedCount: 986,
+      liked: false,
     ),
     Article(
       id: '9',
@@ -99,6 +117,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'The Flutter Meetup Network (FMN) is an international network of Meetup groups united by their enthusiasm for Flutter.',
       likedCount: 470,
+      liked: false,
     ),
     Article(
       id: '10',
@@ -106,6 +125,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'Performance improvements, DevTools updates, new Material You support, a new app template, and more!',
       likedCount: 3700,
+      liked: false,
     ),
     Article(
       id: '11',
@@ -113,6 +133,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'Authoring a good code sample is hard. Let me clarify that, putting together a sample that demonstrates the usage of an API',
       likedCount: 2100,
+      liked: false,
     ),
     Article(
       id: '12',
@@ -120,6 +141,7 @@ class ArticleMockService extends ArticleServiceBase {
       body:
           'Our priorities for upcoming releases, focusing on performance, developer experience and web integration',
       likedCount: 1900,
+      liked: false,
     ),
   ];
 }

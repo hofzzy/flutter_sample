@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../article.dart';
+import '../dialog.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
-import '../liked_count_view.dart';
+import '../liked_notifier.dart';
 import '../router.dart';
+import 'like_count_view.dart';
+import 'like_icon_button.dart';
 
 final fetchArticle =
     FutureProvider.autoDispose.family<Article, String>((ref, id) {
@@ -13,8 +18,8 @@ final fetchArticle =
   return articleClient.getArticle(id);
 });
 
-class ArticleDetailScreen extends ConsumerWidget {
-  static const routeName = 'artist_detail';
+class ArticleDetailScreen extends ConsumerStatefulWidget {
+  static const routeName = 'article_detail';
 
   final String _articleId;
 
@@ -23,11 +28,47 @@ class ArticleDetailScreen extends ConsumerWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final article = ref.watch(fetchArticle(_articleId));
+  ArticleDetailState createState() => ArticleDetailState();
+}
+
+class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _subscription =
+        ref.read(likedNotifierProvider).notifications.listen((isLiked) async {
+      final articleClient = ref.read(articleClientProvider);
+      try {
+        await articleClient.likeArticle(widget._articleId, isLiked);
+      } on NetworkException catch (e) {
+        showSimpleDialog(context, title: 'いいねに失敗しました', body: e.message);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final fetchArticleProvider = fetchArticle(widget._articleId);
+    final article = ref.watch(fetchArticleProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('記事詳細')),
+      appBar: AppBar(
+        title: const Text('記事詳細'),
+        actions: article.when(
+          data: (article) => [LikeIconButton(article.isLiked)],
+          error: (error, _) => [],
+          loading: () => [],
+        ),
+      ),
       body: article.when(
         data: (article) {
           return Padding(
@@ -44,7 +85,7 @@ class ArticleDetailScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    LikedCountView(article.likedCount),
+                    LikeCountView(article.likedCount),
                   ],
                 ),
                 const SizedBox(height: 16),

@@ -16,11 +16,12 @@ const Article$json = const {
     const {'1': 'title', '3': 2, '4': 1, '5': 9, '10': 'title'},
     const {'1': 'body', '3': 3, '4': 1, '5': 9, '10': 'body'},
     const {'1': 'liked_count', '3': 4, '4': 1, '5': 5, '10': 'likedCount'},
+    const {'1': 'liked', '3': 5, '4': 1, '5': 8, '10': 'liked'},
   ],
 };
 
 /// Descriptor for `Article`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List articleDescriptor = $convert.base64Decode('CgdBcnRpY2xlEg4KAmlkGAEgASgJUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSEgoEYm9keRgDIAEoCVIEYm9keRIfCgtsaWtlZF9jb3VudBgEIAEoBVIKbGlrZWRDb3VudA==');
+final $typed_data.Uint8List articleDescriptor = $convert.base64Decode('CgdBcnRpY2xlEg4KAmlkGAEgASgJUgJpZBIUCgV0aXRsZRgCIAEoCVIFdGl0bGUSEgoEYm9keRgDIAEoCVIEYm9keRIfCgtsaWtlZF9jb3VudBgEIAEoBVIKbGlrZWRDb3VudBIUCgVsaWtlZBgFIAEoCFIFbGlrZWQ=');
 @$core.Deprecated('Use listArticlesRequestDescriptor instead')
 const ListArticlesRequest$json = const {
   '1': 'ListArticlesRequest',
@@ -62,12 +63,13 @@ final $typed_data.Uint8List getArticleResponseDescriptor = $convert.base64Decode
 const LikeArticleRequest$json = const {
   '1': 'LikeArticleRequest',
   '2': const [
-    const {'1': 'article_id', '3': 1, '4': 1, '5': 5, '10': 'articleId'},
+    const {'1': 'article_id', '3': 1, '4': 1, '5': 9, '10': 'articleId'},
+    const {'1': 'liked', '3': 2, '4': 1, '5': 8, '10': 'liked'},
   ],
 };
 
 /// Descriptor for `LikeArticleRequest`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List likeArticleRequestDescriptor = $convert.base64Decode('ChJMaWtlQXJ0aWNsZVJlcXVlc3QSHQoKYXJ0aWNsZV9pZBgBIAEoBVIJYXJ0aWNsZUlk');
+final $typed_data.Uint8List likeArticleRequestDescriptor = $convert.base64Decode('ChJMaWtlQXJ0aWNsZVJlcXVlc3QSHQoKYXJ0aWNsZV9pZBgBIAEoCVIJYXJ0aWNsZUlkEhQKBWxpa2VkGAIgASgIUgVsaWtlZA==');
 @$core.Deprecated('Use likeArticleResponseDescriptor instead')
 const LikeArticleResponse$json = const {
   '1': 'LikeArticleResponse',

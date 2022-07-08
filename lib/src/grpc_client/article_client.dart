@@ -27,7 +27,7 @@ class ArticleClient extends GrpcClient<pb.ArticleServiceClient> {
     return handleCommonError(() async {
       final response = await client.listArticles(request);
       return response.articles
-          .map((e) => Article(e.id, e.title, e.body, e.likedCount))
+          .map((e) => Article(e.id, e.title, e.body, e.likedCount, e.liked))
           .toList();
     });
   }
@@ -36,15 +36,15 @@ class ArticleClient extends GrpcClient<pb.ArticleServiceClient> {
     final request = pb.GetArticleRequest(id: id);
     return handleCommonError(() async {
       final article = (await client.getArticle(request)).article;
-      return Article(
-          article.id, article.title, article.body, article.likedCount);
+      return Article(article.id, article.title, article.body,
+          article.likedCount, article.liked);
     });
   }
 
-  Future<void> likeArticle() async {
-    final request = pb.LikeArticleRequest();
-    return handleCommonError(() async {
-      await client.likeArticle(request);
+  Future<void> likeArticle(String articleId, bool isLiked) async {
+    final request = pb.LikeArticleRequest(articleId: articleId, liked: isLiked);
+    return handleCommonError(() {
+      return client.likeArticle(request);
     });
   }
 }

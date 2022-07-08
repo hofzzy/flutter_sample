@@ -15,6 +15,7 @@ class Article extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'title')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'body')
     ..a<$core.int>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'likedCount', $pb.PbFieldType.O3)
+    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liked')
     ..hasRequiredFields = false
   ;
 
@@ -24,6 +25,7 @@ class Article extends $pb.GeneratedMessage {
     $core.String? title,
     $core.String? body,
     $core.int? likedCount,
+    $core.bool? liked,
   }) {
     final _result = create();
     if (id != null) {
@@ -37,6 +39,9 @@ class Article extends $pb.GeneratedMessage {
     }
     if (likedCount != null) {
       _result.likedCount = likedCount;
+    }
+    if (liked != null) {
+      _result.liked = liked;
     }
     return _result;
   }
@@ -96,6 +101,15 @@ class Article extends $pb.GeneratedMessage {
   $core.bool hasLikedCount() => $_has(3);
   @$pb.TagNumber(4)
   void clearLikedCount() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get liked => $_getBF(4);
+  @$pb.TagNumber(5)
+  set liked($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasLiked() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearLiked() => clearField(5);
 }
 
 class ListArticlesRequest extends $pb.GeneratedMessage {
@@ -266,17 +280,22 @@ class GetArticleResponse extends $pb.GeneratedMessage {
 
 class LikeArticleRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LikeArticleRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'articleId', $pb.PbFieldType.O3)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'articleId')
+    ..aOB(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'liked')
     ..hasRequiredFields = false
   ;
 
   LikeArticleRequest._() : super();
   factory LikeArticleRequest({
-    $core.int? articleId,
+    $core.String? articleId,
+    $core.bool? liked,
   }) {
     final _result = create();
     if (articleId != null) {
       _result.articleId = articleId;
+    }
+    if (liked != null) {
+      _result.liked = liked;
     }
     return _result;
   }
@@ -302,13 +321,22 @@ class LikeArticleRequest extends $pb.GeneratedMessage {
   static LikeArticleRequest? _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.int get articleId => $_getIZ(0);
+  $core.String get articleId => $_getSZ(0);
   @$pb.TagNumber(1)
-  set articleId($core.int v) { $_setSignedInt32(0, v); }
+  set articleId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
   $core.bool hasArticleId() => $_has(0);
   @$pb.TagNumber(1)
   void clearArticleId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.bool get liked => $_getBF(1);
+  @$pb.TagNumber(2)
+  set liked($core.bool v) { $_setBool(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasLiked() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearLiked() => clearField(2);
 }
 
 class LikeArticleResponse extends $pb.GeneratedMessage {
