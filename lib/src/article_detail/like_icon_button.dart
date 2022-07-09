@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../liked_notifier.dart';
+import 'liked_notifier.dart';
 
 final likedStateProvider =
     StateProvider.autoDispose.family<bool, bool>((ref, isLiked) => isLiked);

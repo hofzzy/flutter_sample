@@ -7,10 +7,10 @@ import '../article.dart';
 import '../dialog.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
-import '../liked_notifier.dart';
 import '../router.dart';
 import 'like_count_view.dart';
 import 'like_icon_button.dart';
+import 'liked_notifier.dart';
 
 final fetchArticle =
     FutureProvider.autoDispose.family<Article, String>((ref, id) {
@@ -43,6 +43,7 @@ class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
       final articleClient = ref.read(articleClientProvider);
       try {
         await articleClient.likeArticle(widget._articleId, isLiked);
+        ref.read(likedRequestSucceededNotifierProvider).notification.add(null);
       } on NetworkException catch (e) {
         showSimpleDialog(context, title: 'いいねに失敗しました', body: e.message);
       }

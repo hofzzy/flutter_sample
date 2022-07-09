@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../article.dart';
 import '../article_detail/article_detail_screen.dart';
+import '../article_detail/liked_notifier.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
 import '../liked_count_view.dart';
@@ -13,11 +16,36 @@ final fetchArticlesProvider = FutureProvider<List<Article>>((ref) async {
   return articleClient.listArticles();
 });
 
-class ArticleListScreen extends ConsumerWidget {
+class ArticleListScreen extends ConsumerStatefulWidget {
   const ArticleListScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ArticleListState createState() => ArticleListState();
+}
+
+class ArticleListState extends ConsumerState<ArticleListScreen> {
+  StreamSubscription? _subscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _subscription = ref
+        .read(likedRequestSucceededNotifierProvider)
+        .notifications
+        .listen((_) {
+      ref.refresh(fetchArticlesProvider);
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final articles = ref.watch(fetchArticlesProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('記事一覧')),
