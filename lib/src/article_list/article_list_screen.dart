@@ -23,8 +23,12 @@ class ArticleListScreen extends ConsumerStatefulWidget {
   ArticleListState createState() => ArticleListState();
 }
 
-class ArticleListState extends ConsumerState<ArticleListScreen> {
+class ArticleListState extends ConsumerState<ArticleListScreen>
+    with AutomaticKeepAliveClientMixin {
   StreamSubscription? _subscription;
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -46,9 +50,10 @@ class ArticleListState extends ConsumerState<ArticleListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final articles = ref.watch(fetchArticlesProvider);
     return Scaffold(
-      appBar: AppBar(title: const Text('記事一覧')),
+      appBar: AppBar(title: const Text('Latest'), centerTitle: false),
       body: articles.when(
         data: (articles) {
           return ListView.builder(

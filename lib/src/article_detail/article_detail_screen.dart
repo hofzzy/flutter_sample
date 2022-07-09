@@ -63,7 +63,6 @@ class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('記事詳細'),
         actions: article.when(
           data: (article) => [LikeIconButton(article.isLiked)],
           error: (error, _) => [],
