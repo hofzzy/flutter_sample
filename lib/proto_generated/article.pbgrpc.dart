@@ -26,6 +26,12 @@ class ArticleServiceClient extends $grpc.Client {
           ($0.GetArticleRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetArticleResponse.fromBuffer(value));
+  static final _$listLikedArticles = $grpc.ClientMethod<
+          $0.ListLikedArticlesRequest, $0.ListLikedArticlesResponse>(
+      '/flutter_sample.ArticleService/ListLikedArticles',
+      ($0.ListLikedArticlesRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.ListLikedArticlesResponse.fromBuffer(value));
   static final _$likeArticle =
       $grpc.ClientMethod<$0.LikeArticleRequest, $0.LikeArticleResponse>(
           '/flutter_sample.ArticleService/LikeArticle',
@@ -48,6 +54,12 @@ class ArticleServiceClient extends $grpc.Client {
       $0.GetArticleRequest request,
       {$grpc.CallOptions? options}) {
     return $createUnaryCall(_$getArticle, request, options: options);
+  }
+
+  $grpc.ResponseFuture<$0.ListLikedArticlesResponse> listLikedArticles(
+      $0.ListLikedArticlesRequest request,
+      {$grpc.CallOptions? options}) {
+    return $createUnaryCall(_$listLikedArticles, request, options: options);
   }
 
   $grpc.ResponseFuture<$0.LikeArticleResponse> likeArticle(
@@ -77,6 +89,15 @@ abstract class ArticleServiceBase extends $grpc.Service {
         false,
         ($core.List<$core.int> value) => $0.GetArticleRequest.fromBuffer(value),
         ($0.GetArticleResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.ListLikedArticlesRequest,
+            $0.ListLikedArticlesResponse>(
+        'ListLikedArticles',
+        listLikedArticles_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.ListLikedArticlesRequest.fromBuffer(value),
+        ($0.ListLikedArticlesResponse value) => value.writeToBuffer()));
     $addMethod(
         $grpc.ServiceMethod<$0.LikeArticleRequest, $0.LikeArticleResponse>(
             'LikeArticle',
@@ -99,6 +120,12 @@ abstract class ArticleServiceBase extends $grpc.Service {
     return getArticle(call, await request);
   }
 
+  $async.Future<$0.ListLikedArticlesResponse> listLikedArticles_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.ListLikedArticlesRequest> request) async {
+    return listLikedArticles(call, await request);
+  }
+
   $async.Future<$0.LikeArticleResponse> likeArticle_Pre($grpc.ServiceCall call,
       $async.Future<$0.LikeArticleRequest> request) async {
     return likeArticle(call, await request);
@@ -108,6 +135,8 @@ abstract class ArticleServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.ListArticlesRequest request);
   $async.Future<$0.GetArticleResponse> getArticle(
       $grpc.ServiceCall call, $0.GetArticleRequest request);
+  $async.Future<$0.ListLikedArticlesResponse> listLikedArticles(
+      $grpc.ServiceCall call, $0.ListLikedArticlesRequest request);
   $async.Future<$0.LikeArticleResponse> likeArticle(
       $grpc.ServiceCall call, $0.LikeArticleRequest request);
 }

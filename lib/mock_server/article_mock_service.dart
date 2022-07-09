@@ -21,6 +21,14 @@ class ArticleMockService extends ArticleServiceBase {
   }
 
   @override
+  Future<ListLikedArticlesResponse> listLikedArticles(
+      ServiceCall call, ListLikedArticlesRequest request) async {
+    await handleCommonPreProcess();
+    final articles = this.articles.where((e) => e.liked);
+    return ListLikedArticlesResponse(articles: articles);
+  }
+
+  @override
   Future<LikeArticleResponse> likeArticle(
       ServiceCall call, LikeArticleRequest request) async {
     await handleCommonPreProcess();

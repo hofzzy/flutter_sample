@@ -278,6 +278,76 @@ class GetArticleResponse extends $pb.GeneratedMessage {
   Article ensureArticle() => $_ensure(0);
 }
 
+class ListLikedArticlesRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLikedArticlesRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
+    ..hasRequiredFields = false
+  ;
+
+  ListLikedArticlesRequest._() : super();
+  factory ListLikedArticlesRequest() => create();
+  factory ListLikedArticlesRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListLikedArticlesRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListLikedArticlesRequest clone() => ListLikedArticlesRequest()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListLikedArticlesRequest copyWith(void Function(ListLikedArticlesRequest) updates) => super.copyWith((message) => updates(message as ListLikedArticlesRequest)) as ListLikedArticlesRequest; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListLikedArticlesRequest create() => ListLikedArticlesRequest._();
+  ListLikedArticlesRequest createEmptyInstance() => create();
+  static $pb.PbList<ListLikedArticlesRequest> createRepeated() => $pb.PbList<ListLikedArticlesRequest>();
+  @$core.pragma('dart2js:noInline')
+  static ListLikedArticlesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLikedArticlesRequest>(create);
+  static ListLikedArticlesRequest? _defaultInstance;
+}
+
+class ListLikedArticlesResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ListLikedArticlesResponse', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
+    ..pc<Article>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'articles', $pb.PbFieldType.PM, subBuilder: Article.create)
+    ..hasRequiredFields = false
+  ;
+
+  ListLikedArticlesResponse._() : super();
+  factory ListLikedArticlesResponse({
+    $core.Iterable<Article>? articles,
+  }) {
+    final _result = create();
+    if (articles != null) {
+      _result.articles.addAll(articles);
+    }
+    return _result;
+  }
+  factory ListLikedArticlesResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ListLikedArticlesResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ListLikedArticlesResponse clone() => ListLikedArticlesResponse()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ListLikedArticlesResponse copyWith(void Function(ListLikedArticlesResponse) updates) => super.copyWith((message) => updates(message as ListLikedArticlesResponse)) as ListLikedArticlesResponse; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ListLikedArticlesResponse create() => ListLikedArticlesResponse._();
+  ListLikedArticlesResponse createEmptyInstance() => create();
+  static $pb.PbList<ListLikedArticlesResponse> createRepeated() => $pb.PbList<ListLikedArticlesResponse>();
+  @$core.pragma('dart2js:noInline')
+  static ListLikedArticlesResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ListLikedArticlesResponse>(create);
+  static ListLikedArticlesResponse? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.List<Article> get articles => $_getList(0);
+}
+
 class LikeArticleRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'LikeArticleRequest', package: const $pb.PackageName(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'flutter_sample'), createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'articleId')

@@ -41,6 +41,16 @@ class ArticleClient extends GrpcClient<pb.ArticleServiceClient> {
     });
   }
 
+  Future<List<Article>> listLikedArticles() async {
+    final request = pb.ListLikedArticlesRequest();
+    return handleCommonError(() async {
+      final response = await client.listLikedArticles(request);
+      return response.articles
+          .map((e) => Article(e.id, e.title, e.body, e.likedCount, e.liked))
+          .toList();
+    });
+  }
+
   Future<void> likeArticle(String articleId, bool isLiked) async {
     final request = pb.LikeArticleRequest(articleId: articleId, liked: isLiked);
     return handleCommonError(() {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   static final ThemeData defaultTheme = ThemeData(
     appBarTheme: const AppBarTheme(
+      foregroundColor: Colors.black87,
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(
           fontSize: 18, color: Colors.black87, fontWeight: FontWeight.bold),
@@ -20,6 +21,7 @@ class AppTheme {
       caption: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
       overline: TextStyle(fontSize: 10, fontWeight: FontWeight.normal),
     ),
+    iconTheme: const IconThemeData(color: Colors.black87),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: Colors.black87,
       unselectedItemColor: Colors.black87,

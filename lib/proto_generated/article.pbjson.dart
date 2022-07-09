@@ -59,6 +59,23 @@ const GetArticleResponse$json = const {
 
 /// Descriptor for `GetArticleResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List getArticleResponseDescriptor = $convert.base64Decode('ChJHZXRBcnRpY2xlUmVzcG9uc2USMQoHYXJ0aWNsZRgBIAEoCzIXLmZsdXR0ZXJfc2FtcGxlLkFydGljbGVSB2FydGljbGU=');
+@$core.Deprecated('Use listLikedArticlesRequestDescriptor instead')
+const ListLikedArticlesRequest$json = const {
+  '1': 'ListLikedArticlesRequest',
+};
+
+/// Descriptor for `ListLikedArticlesRequest`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLikedArticlesRequestDescriptor = $convert.base64Decode('ChhMaXN0TGlrZWRBcnRpY2xlc1JlcXVlc3Q=');
+@$core.Deprecated('Use listLikedArticlesResponseDescriptor instead')
+const ListLikedArticlesResponse$json = const {
+  '1': 'ListLikedArticlesResponse',
+  '2': const [
+    const {'1': 'articles', '3': 1, '4': 3, '5': 11, '6': '.flutter_sample.Article', '10': 'articles'},
+  ],
+};
+
+/// Descriptor for `ListLikedArticlesResponse`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List listLikedArticlesResponseDescriptor = $convert.base64Decode('ChlMaXN0TGlrZWRBcnRpY2xlc1Jlc3BvbnNlEjMKCGFydGljbGVzGAEgAygLMhcuZmx1dHRlcl9zYW1wbGUuQXJ0aWNsZVIIYXJ0aWNsZXM=');
 @$core.Deprecated('Use likeArticleRequestDescriptor instead')
 const LikeArticleRequest$json = const {
   '1': 'LikeArticleRequest',
