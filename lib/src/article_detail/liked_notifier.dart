@@ -25,10 +25,10 @@ class LikedNotifier {
 }
 
 class LikedRequestSucceededNotifier {
-  final _controller = StreamController<void>();
+  final _controller = StreamController<void>.broadcast();
 
   Sink<void> get notification => _controller.sink;
-  Stream<void> get notifications => _controller.stream;
+  Stream<void> get notifications => _controller.stream.asBroadcastStream();
 
   Future<void> dispose() => _controller.close();
 }

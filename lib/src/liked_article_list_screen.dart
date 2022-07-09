@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'article.dart';
 import 'article_detail/article_detail_screen.dart';
+import 'article_detail/liked_notifier.dart';
 import 'grpc_client/article_client.dart';
 import 'grpc_client/network_exception.dart';
 import 'liked_count_view.dart';
@@ -22,8 +25,28 @@ class LikedArticleListScreen extends ConsumerStatefulWidget {
 
 class LikedArticleListState extends ConsumerState<LikedArticleListScreen>
     with AutomaticKeepAliveClientMixin {
+  StreamSubscription? _subscription;
+
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _subscription = ref
+        .read(likedRequestSucceededNotifierProvider)
+        .notifications
+        .listen((_) {
+      ref.refresh(fetchLikedArticlesProvider);
+    });
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
