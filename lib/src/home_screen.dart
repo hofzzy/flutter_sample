@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'article_list/article_list_screen.dart';
-import 'liked_article_list_screen.dart';
+import 'liked_article_list/liked_article_list_screen.dart';
 
 final selectedIndexProvider = StateProvider<int>((ref) => 0);
 

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../liked_count_view.dart' as shared;
+import '../widget/liked_count_view.dart' as shared;
 import 'liked_notifier.dart';
 
 final likedCountStateProvider =

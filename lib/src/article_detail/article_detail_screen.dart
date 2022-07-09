@@ -88,10 +88,13 @@ class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
                     LikeCountView(article.likedCount),
                   ],
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 Text(
                   article.body,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      ?.copyWith(height: 1.4),
                 ),
               ],
             ),

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'article.dart';
-import 'article_detail/article_detail_screen.dart';
-import 'article_detail/liked_notifier.dart';
-import 'grpc_client/article_client.dart';
-import 'grpc_client/network_exception.dart';
-import 'liked_count_view.dart';
+import '../article.dart';
+import '../article_detail/article_detail_screen.dart';
+import '../article_detail/liked_notifier.dart';
+import '../grpc_client/article_client.dart';
+import '../grpc_client/network_exception.dart';
+import '../widget/article_list_tile.dart';
 
 final fetchLikedArticlesProvider = FutureProvider<List<Article>>((ref) async {
   final articleClient = ref.read(articleClientProvider);
@@ -56,22 +56,23 @@ class LikedArticleListState extends ConsumerState<LikedArticleListScreen>
       appBar: AppBar(title: const Text('Your favorites'), centerTitle: false),
       body: likedArticles.when(
         data: (articles) {
-          return ListView.builder(
+          return ListView.separated(
             itemBuilder: (_, index) {
-              final article = articles[index];
-              return ListTile(
-                title: Text(article.title, maxLines: 1),
-                subtitle: Text(article.body, maxLines: 1),
-                trailing: LikedCountView(article.likedCount),
+              return ArticleListTile(
+                articles[index],
                 onTap: () {
                   context.pushNamed(
                     ArticleDetailScreen.routeName,
-                    params: ArticleDetailArgument(article.id).toParams(),
+                    params:
+                        ArticleDetailArgument(articles[index].id).toParams(),
                   );
                 },
               );
             },
             itemCount: articles.length,
+            separatorBuilder: (context, index) {
+              return const Divider(height: 1, indent: 16);
+            },
           );
         },
         error: (error, _) {

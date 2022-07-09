@@ -27,11 +27,11 @@ class LikedCountView extends ConsumerWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(Icons.favorite, size: 18),
+        const Icon(Icons.favorite, size: 14),
         const SizedBox(width: 4),
         Text(
           model.getDisplayCount(_count),
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static final ThemeData defaultTheme = ThemeData(
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
       foregroundColor: Colors.black87,
       backgroundColor: Colors.white,
@@ -27,5 +28,7 @@ class AppTheme {
       unselectedItemColor: Colors.black87,
       backgroundColor: Colors.white,
     ),
+    progressIndicatorTheme:
+        const ProgressIndicatorThemeData(color: Colors.black87),
   );
 }
