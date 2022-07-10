@@ -15,6 +15,8 @@ This example demonstrates how to:
 - manage an app theme with ThemeData
 - optimize widget rebuilds (only what needs to update does update)
 
+![screens](https://user-images.githubusercontent.com/35392365/178141183-abaf9368-9812-4da6-a57a-c089928fcf1d.png)
+
 ## Get started
 
 ### Run a gRPC mock server
