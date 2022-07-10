@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final likedNotifierProvider = Provider<LikedNotifier>((ref) {
@@ -25,10 +26,19 @@ class LikedNotifier {
 }
 
 class LikedRequestSucceededNotifier {
-  final _controller = StreamController<void>.broadcast();
+  final _controller = StreamController<LikedArticle>.broadcast();
 
-  Sink<void> get notification => _controller.sink;
-  Stream<void> get notifications => _controller.stream.asBroadcastStream();
+  Sink<LikedArticle> get notification => _controller.sink;
+  Stream<LikedArticle> get notifications =>
+      _controller.stream.asBroadcastStream();
 
   Future<void> dispose() => _controller.close();
+}
+
+@immutable
+class LikedArticle {
+  final String id;
+  final bool isLiked;
+
+  const LikedArticle(this.id, this.isLiked);
 }

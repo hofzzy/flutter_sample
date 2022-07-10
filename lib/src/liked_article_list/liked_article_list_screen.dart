@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../article.dart';
 import '../article_detail/article_detail_screen.dart';
@@ -10,6 +9,7 @@ import '../article_detail/liked_notifier.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
 import '../widget/article_list_tile.dart';
+import '../widget/liked_count_view.dart';
 
 final fetchLikedArticlesProvider = FutureProvider<List<Article>>((ref) async {
   final articleClient = ref.read(articleClientProvider);
@@ -58,13 +58,22 @@ class LikedArticleListState extends ConsumerState<LikedArticleListScreen>
         data: (articles) {
           return ListView.separated(
             itemBuilder: (_, index) {
+              final article = articles[index];
               return ArticleListTile(
-                articles[index],
+                article,
+                trailing: LikedCountView(article.likedCount),
                 onTap: () {
-                  context.pushNamed(
+                  Navigator.of(context).pushNamed(
                     ArticleDetailScreen.routeName,
-                    params:
-                        ArticleDetailArgument(articles[index].id).toParams(),
+                    arguments: ArticleDetailArgument(
+                      article.id,
+                      onLikeRequestComplete: (isLiked) {
+                        ref
+                            .read(likedRequestSucceededNotifierProvider)
+                            .notification
+                            .add(LikedArticle(article.id, isLiked));
+                      },
+                    ),
                   );
                 },
               );

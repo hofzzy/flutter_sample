@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../article.dart';
-import 'liked_count_view.dart';
 
 class ArticleListTile extends StatelessWidget {
   final Article _article;
+  final Widget? _trailing;
   final VoidCallback? _onTap;
 
-  const ArticleListTile(Article article, {Key? key, VoidCallback? onTap})
+  const ArticleListTile(Article article,
+      {Key? key, Widget? trailing, VoidCallback? onTap})
       : _article = article,
+        _trailing = trailing,
         _onTap = onTap,
         super(key: key);
 
@@ -40,8 +42,11 @@ class ArticleListTile extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(width: 12),
-            LikedCountView(_article.likedCount),
+            if (_trailing != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: _trailing,
+              ),
           ],
         ),
       ),

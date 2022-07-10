@@ -6,25 +6,28 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widget/liked_count_view.dart' as shared;
 import 'liked_notifier.dart';
 
-final likedCountStateProvider =
-    StateProvider.autoDispose.family<int, int>((ref, count) => count);
+final _likedCountStateProvider = StateProvider.autoDispose<int>((ref) {
+  throw UnimplementedError();
+});
 
-class LikeCountView extends ConsumerStatefulWidget {
-  final int _initialCount;
+class LikedCountView extends ConsumerStatefulWidget {
+  static ProviderScope create(int likedCount) {
+    return ProviderScope(
+      overrides: [
+        _likedCountStateProvider.overrideWithValue(StateController(likedCount)),
+      ],
+      child: const LikedCountView._(),
+    );
+  }
 
-  const LikeCountView(int count, {Key? key})
-      : _initialCount = count,
-        super(key: key);
+  const LikedCountView._({Key? key}) : super(key: key);
 
   @override
   LikeCountViewState createState() => LikeCountViewState();
 }
 
-class LikeCountViewState extends ConsumerState<LikeCountView> {
+class LikeCountViewState extends ConsumerState<LikedCountView> {
   StreamSubscription? _subscription;
-
-  AutoDisposeStateProvider<int> get _stateProvider =>
-      likedCountStateProvider(widget._initialCount);
 
   @override
   void initState() {
@@ -32,7 +35,7 @@ class LikeCountViewState extends ConsumerState<LikeCountView> {
 
     _subscription =
         ref.read(likedNotifierProvider).notifications.listen((isLiked) {
-      final notifier = ref.read(_stateProvider.notifier);
+      final notifier = ref.read(_likedCountStateProvider.notifier);
       isLiked ? notifier.state++ : notifier.state--;
     });
   }
@@ -45,7 +48,7 @@ class LikeCountViewState extends ConsumerState<LikeCountView> {
 
   @override
   Widget build(BuildContext context) {
-    final count = ref.watch(_stateProvider);
+    final count = ref.watch(_likedCountStateProvider);
     return shared.LikedCountView(count);
   }
 }

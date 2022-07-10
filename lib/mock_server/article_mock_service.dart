@@ -51,7 +51,7 @@ class ArticleMockService extends ArticleServiceBase {
     }
   }
 
-  final articles = [
+  final List<Article> articles = [
     Article(
       id: '1',
       title: 'What’s new in Flutter 3',
@@ -85,7 +85,7 @@ class ArticleMockService extends ArticleServiceBase {
       title: 'What’s New in Flutter 2.10',
       body:
           'I can’t believe it’s time again for a Flutter stable release! Hello and welcome to Flutter 2.10.',
-      likedCount: 4100,
+      likedCount: 99,
       liked: false,
     ),
     Article(
@@ -135,21 +135,15 @@ class ArticleMockService extends ArticleServiceBase {
       likedCount: 3700,
       liked: false,
     ),
-    Article(
-      id: '11',
-      title: 'Writing a good code sample',
-      body:
-          'Authoring a good code sample is hard. Let me clarify that, putting together a sample that demonstrates the usage of an API',
-      likedCount: 2100,
-      liked: false,
-    ),
-    Article(
-      id: '12',
-      title: 'Flutter: What’s next on the Web?',
-      body:
-          'Our priorities for upcoming releases, focusing on performance, developer experience and web integration',
-      likedCount: 1900,
-      liked: false,
-    ),
+    ...List<Article>.generate(40, (index) {
+      return Article(
+        id: '${index + 11}',
+        title: 'Lorem ipsum',
+        body:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        likedCount: index + 1,
+        liked: false,
+      );
+    }),
   ];
 }

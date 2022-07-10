@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../article.dart';
 import '../article_detail/article_detail_screen.dart';
@@ -10,6 +9,7 @@ import '../article_detail/liked_notifier.dart';
 import '../grpc_client/article_client.dart';
 import '../grpc_client/network_exception.dart';
 import '../widget/article_list_tile.dart';
+import 'liked_count_view.dart';
 
 final fetchArticlesProvider = FutureProvider<List<Article>>((ref) async {
   final articleClient = ref.read(articleClientProvider);
@@ -31,18 +31,6 @@ class ArticleListState extends ConsumerState<ArticleListScreen>
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-
-    _subscription = ref
-        .read(likedRequestSucceededNotifierProvider)
-        .notifications
-        .listen((_) {
-      ref.refresh(fetchArticlesProvider);
-    });
-  }
-
-  @override
   void dispose() {
     _subscription?.cancel();
     super.dispose();
@@ -58,13 +46,22 @@ class ArticleListState extends ConsumerState<ArticleListScreen>
         data: (articles) {
           return ListView.separated(
             itemBuilder: (_, index) {
+              final article = articles[index];
               return ArticleListTile(
-                articles[index],
+                article,
+                trailing: LikedCountView.create(article.id, article.likedCount),
                 onTap: () {
-                  context.pushNamed(
+                  Navigator.of(context).pushNamed(
                     ArticleDetailScreen.routeName,
-                    params:
-                        ArticleDetailArgument(articles[index].id).toParams(),
+                    arguments: ArticleDetailArgument(
+                      article.id,
+                      onLikeRequestComplete: (isLiked) {
+                        ref
+                            .read(likedRequestSucceededNotifierProvider)
+                            .notification
+                            .add(LikedArticle(article.id, isLiked));
+                      },
+                    ),
                   );
                 },
               );
