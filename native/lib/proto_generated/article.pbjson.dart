@@ -94,3 +94,28 @@ const LikeArticleResponse$json = const {
 
 /// Descriptor for `LikeArticleResponse`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List likeArticleResponseDescriptor = $convert.base64Decode('ChNMaWtlQXJ0aWNsZVJlc3BvbnNl');
+const $core.Map<$core.String, $core.dynamic> ArticleServiceBase$json = const {
+  '1': 'ArticleService',
+  '2': const [
+    const {'1': 'ListArticles', '2': '.flutter_sample.ListArticlesRequest', '3': '.flutter_sample.ListArticlesResponse', '4': const {}},
+    const {'1': 'GetArticle', '2': '.flutter_sample.GetArticleRequest', '3': '.flutter_sample.GetArticleResponse', '4': const {}},
+    const {'1': 'ListLikedArticles', '2': '.flutter_sample.ListLikedArticlesRequest', '3': '.flutter_sample.ListLikedArticlesResponse', '4': const {}},
+    const {'1': 'LikeArticle', '2': '.flutter_sample.LikeArticleRequest', '3': '.flutter_sample.LikeArticleResponse', '4': const {}},
+  ],
+};
+
+@$core.Deprecated('Use articleServiceDescriptor instead')
+const $core.Map<$core.String, $core.Map<$core.String, $core.dynamic>> ArticleServiceBase$messageJson = const {
+  '.flutter_sample.ListArticlesRequest': ListArticlesRequest$json,
+  '.flutter_sample.ListArticlesResponse': ListArticlesResponse$json,
+  '.flutter_sample.Article': Article$json,
+  '.flutter_sample.GetArticleRequest': GetArticleRequest$json,
+  '.flutter_sample.GetArticleResponse': GetArticleResponse$json,
+  '.flutter_sample.ListLikedArticlesRequest': ListLikedArticlesRequest$json,
+  '.flutter_sample.ListLikedArticlesResponse': ListLikedArticlesResponse$json,
+  '.flutter_sample.LikeArticleRequest': LikeArticleRequest$json,
+  '.flutter_sample.LikeArticleResponse': LikeArticleResponse$json,
+};
+
+/// Descriptor for `ArticleService`. Decode as a `google.protobuf.ServiceDescriptorProto`.
+final $typed_data.Uint8List articleServiceDescriptor = $convert.base64Decode('Cg5BcnRpY2xlU2VydmljZRJbCgxMaXN0QXJ0aWNsZXMSIy5mbHV0dGVyX3NhbXBsZS5MaXN0QXJ0aWNsZXNSZXF1ZXN0GiQuZmx1dHRlcl9zYW1wbGUuTGlzdEFydGljbGVzUmVzcG9uc2UiABJVCgpHZXRBcnRpY2xlEiEuZmx1dHRlcl9zYW1wbGUuR2V0QXJ0aWNsZVJlcXVlc3QaIi5mbHV0dGVyX3NhbXBsZS5HZXRBcnRpY2xlUmVzcG9uc2UiABJqChFMaXN0TGlrZWRBcnRpY2xlcxIoLmZsdXR0ZXJfc2FtcGxlLkxpc3RMaWtlZEFydGljbGVzUmVxdWVzdBopLmZsdXR0ZXJfc2FtcGxlLkxpc3RMaWtlZEFydGljbGVzUmVzcG9uc2UiABJYCgtMaWtlQXJ0aWNsZRIiLmZsdXR0ZXJfc2FtcGxlLkxpa2VBcnRpY2xlUmVxdWVzdBojLmZsdXR0ZXJfc2FtcGxlLkxpa2VBcnRpY2xlUmVzcG9uc2UiAA==');

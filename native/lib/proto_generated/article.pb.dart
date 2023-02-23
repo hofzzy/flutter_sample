@@ -5,6 +5,7 @@
 // @dart = 2.12
 // ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
+import 'dart:async' as $async;
 import 'dart:core' as $core;
 
 import 'package:protobuf/protobuf.dart' as $pb;
@@ -436,5 +437,27 @@ class LikeArticleResponse extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static LikeArticleResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LikeArticleResponse>(create);
   static LikeArticleResponse? _defaultInstance;
+}
+
+class ArticleServiceApi {
+  $pb.RpcClient _client;
+  ArticleServiceApi(this._client);
+
+  $async.Future<ListArticlesResponse> listArticles($pb.ClientContext? ctx, ListArticlesRequest request) {
+    var emptyResponse = ListArticlesResponse();
+    return _client.invoke<ListArticlesResponse>(ctx, 'ArticleService', 'ListArticles', request, emptyResponse);
+  }
+  $async.Future<GetArticleResponse> getArticle($pb.ClientContext? ctx, GetArticleRequest request) {
+    var emptyResponse = GetArticleResponse();
+    return _client.invoke<GetArticleResponse>(ctx, 'ArticleService', 'GetArticle', request, emptyResponse);
+  }
+  $async.Future<ListLikedArticlesResponse> listLikedArticles($pb.ClientContext? ctx, ListLikedArticlesRequest request) {
+    var emptyResponse = ListLikedArticlesResponse();
+    return _client.invoke<ListLikedArticlesResponse>(ctx, 'ArticleService', 'ListLikedArticles', request, emptyResponse);
+  }
+  $async.Future<LikeArticleResponse> likeArticle($pb.ClientContext? ctx, LikeArticleRequest request) {
+    var emptyResponse = LikeArticleResponse();
+    return _client.invoke<LikeArticleResponse>(ctx, 'ArticleService', 'LikeArticle', request, emptyResponse);
+  }
 }
 
