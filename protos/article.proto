@@ -1,5 +1,8 @@
 syntax = "proto3";
+
 package flutter_sample;
+
+option go_package = "github.com/masssun/flutter_sample/proto_generated";
 
 message Article {
   string id = 1;
@@ -12,7 +15,8 @@ message Article {
 service ArticleService {
   rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse) {}
   rpc GetArticle(GetArticleRequest) returns (GetArticleResponse) {}
-  rpc ListLikedArticles(ListLikedArticlesRequest) returns (ListLikedArticlesResponse) {}
+  rpc ListLikedArticles(ListLikedArticlesRequest)
+      returns (ListLikedArticlesResponse) {}
   rpc LikeArticle(LikeArticleRequest) returns (LikeArticleResponse) {}
 }
 
