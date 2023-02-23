@@ -28,13 +28,13 @@ class ArticleListTile extends StatelessWidget {
                 children: [
                   Text(
                     _article.title,
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 10),
                   Text(
                     _article.body,
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

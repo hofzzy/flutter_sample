@@ -98,7 +98,7 @@ class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
                     Expanded(
                       child: Text(
                         article.title,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -110,7 +110,7 @@ class ArticleDetailState extends ConsumerState<ArticleDetailScreen> {
                   article.body,
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText2
+                      .bodyMedium
                       ?.copyWith(height: 1.4),
                 ),
               ],

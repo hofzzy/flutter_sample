@@ -31,7 +31,7 @@ class LikedCountView extends ConsumerWidget {
         const SizedBox(width: 4),
         Text(
           model.getDisplayCount(_count),
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );
