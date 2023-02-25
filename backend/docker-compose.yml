@@ -1,12 +1,38 @@
 version: "3.8"
 
 services:
+  mysql:
+    container_name: mysql
+    build:
+      context: .
+      dockerfile: mysql.Dockerfile
+    tty: true
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+    networks:
+      - flutter_sample_api_server
+
   grpc-server:
     container_name: "grpc-server"
     build:
       context: .
       dockerfile: server.Dockerfile
+    tty: true
     ports:
       - "8080:8080"
     env_file:
       - .env
+    depends_on:
+      - mysql
+    networks:
+      - flutter_sample_api_server
+    volumes:
+      - .:/repo
+
+networks:
+  flutter_sample_api_server:
+    external: true
