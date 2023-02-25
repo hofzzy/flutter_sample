@@ -19,10 +19,11 @@ This example demonstrates how to:
 
 ## Get started
 
-### Run a gRPC mock server
+### Run Backend
 
 ```bash
-$ dart run bin/mock_server.dart
+$ make setup/backend
+$ make run/backend
 ```
 
 ## Application Architecture
