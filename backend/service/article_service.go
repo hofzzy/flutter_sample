@@ -2,6 +2,9 @@ package service
 
 import (
 	"context"
+	"database/sql"
+	"github.com/masssun/flutter_sample/infrastructure"
+	"strconv"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -11,15 +14,14 @@ import (
 )
 
 type ArticleService struct {
+	db *sql.DB
 	pb.UnimplementedArticleServiceServer
 }
 
-func SayHello() {
-	println("hello!")
-}
-
-func NewArticleService() *ArticleService {
-	return &ArticleService{}
+func NewArticleService(db sql.DB) *ArticleService {
+	return &ArticleService{
+		db: &db,
+	}
 }
 
 func (s *ArticleService) Register(server *grpc.Server) {
@@ -27,7 +29,22 @@ func (s *ArticleService) Register(server *grpc.Server) {
 }
 
 func (s *ArticleService) ListArticles(ctx context.Context, req *pb.ListArticlesRequest) (*pb.ListArticlesResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "unimplemented")
+	articleAll := infrastructure.ReadArticleAll(s.db)
+	likedArticleIds := infrastructure.ReadLikedArticleIds(s.db)
+	var articles []*pb.Article
+	for _, article := range *articleAll {
+		a := pb.Article{
+			Id:         strconv.Itoa(article.Id),
+			Title:      article.Title,
+			Body:       article.Body,
+			LikedCount: int32(article.LikedCount),
+			Liked:      contains(*likedArticleIds, article.Id),
+		}
+		articles = append(articles, &a)
+	}
+	return &pb.ListArticlesResponse{
+		Articles: articles,
+	}, nil
 }
 
 func (s *ArticleService) GetArticle(ctx context.Context, req *pb.GetArticleRequest) (*pb.GetArticleResponse, error) {
@@ -44,4 +61,13 @@ func (s *ArticleService) LikeArticle(ctx context.Context, req *pb.LikeArticleReq
 
 func (s *ArticleService) mustEmbedUnimplementedArticleServiceServer() {
 	return
+}
+
+func contains(s []int, e int) bool {
+	for _, v := range s {
+		if e == v {
+			return true
+		}
+	}
+	return false
 }
