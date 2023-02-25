@@ -26,6 +26,12 @@ $ make setup/backend
 $ make run/backend
 ```
 
+### Run mock server
+
+```bash
+$ cd native && dart run bin/mock_server.dart
+```
+
 ## Application Architecture
 
 ### MVC
